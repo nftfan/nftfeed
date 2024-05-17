@@ -15,14 +15,25 @@
             overflow-x: hidden;
         }
 
-        .container {
-            padding: 20px;
-            position: relative;
-            border-radius: 15px;
-            max-width: 600px;
-            margin: auto;
-            background-color: #f74e1e;
-        }
+   .container {
+    padding: 20px;
+    position: relative;
+    border-radius: 15px;
+    max-width: 600px;
+    margin: auto;
+    background-color: #f74e1e;
+    animation: animateHue 5s linear infinite; /* Animation for hue rotation */
+}
+
+@keyframes animateHue {
+    0% {
+        filter: hue-rotate(0deg); /* Start with no hue rotation */
+    }
+    100% {
+        filter: hue-rotate(360deg); /* Rotate through full hue spectrum */
+    }
+}
+
 
         .image-container {
             text-align: center;
