@@ -8,69 +8,37 @@
         body {
             margin: 0;
             padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #121212;
             font-family: 'Arial', sans-serif;
+            font-size: 12px;
             color: #fff;
             overflow: hidden;
+            background: #121212;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
             position: relative;
-            overflow: hidden;
-            text-align: center;
-            width: 80%;
-            max-width: 600px;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(60deg, #ff00ff, #00ffff, #ff0000, #00ff00, #0000ff);
-            background-size: 200% 200%;
-            z-index: -1;
-            animation: animate 10s infinite linear;
-            opacity: 0.5;
             border-radius: 15px;
+            max-width: 600px;
+            margin: auto;
         }
-
-        @keyframes animate {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        } make more fast and cool
 
         .image-container {
-            position: relative;
-            width: 100%;
-            height: auto;
-            margin: 0;
-            z-index: 2;
+            text-align: center;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6), 0 16px 32px rgba(0, 0, 0, 0.4);
         }
 
         .image-container img {
             width: 100%;
             height: auto;
             border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6), 0 16px 32px rgba(0, 0, 0, 0.4);
         }
 
         .details {
             margin-top: 15px;
-            position: relative;
-            z-index: 2;
+            text-align: center;
         }
 
         .details h1, .details p, .details .price {
@@ -97,8 +65,6 @@
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            z-index: 2;
-            position: relative;
             color: #fff;
         }
 
@@ -108,7 +74,6 @@
 
         .buy-button {
             margin-top: 20px;
-            width: 100%;
             text-align: center;
         }
 
@@ -121,9 +86,8 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             border-radius: 15px;
-            padding: 40px;
+            padding: 20px;
             text-align: center;
-            z-index: 3;
             color: #fff;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
@@ -140,6 +104,37 @@
 
         .close-button:hover {
             background: rgba(255, 255, 255, 0.2);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, #ff00ff, #00ffff, #ff0000, #00ff00, #0000ff);
+            background-size: 200% 200%;
+            z-index: -1;
+            animation: animate 10s infinite linear;
+            opacity: 0.5;
+            border-radius: 15px;
+        }
+
+        @keyframes animate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            .button {
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
@@ -168,49 +163,48 @@
     </div>
 
     <script>
-    const nfts = [
-        {
-            image: "https://i.seadn.io/s/raw/files/57e85b3109fcd65c76536034d0f1a0f6.gif?auto=format&dpr=1&w=1000",
-            name: "Galactic Explorer",
-            description: "A mesmerizing journey through the cosmos, captured in stunning animated detail.",
-            price: "3.5 ETH"
-        },
-        {
-            image: "https://i.seadn.io/s/raw/files/965baeead3f80b530a85106c882d009d.png?auto=format&dpr=1&w=1000",
-            name: "Celestial Guardian",
-            description: "An ethereal being protecting the stars, beautifully depicted in vibrant colors.",
-            price: "4.2 ETH"
+        const nfts = [
+            {
+                image: "https://i.seadn.io/s/raw/files/57e85b3109fcd65c76536034d0f1a0f6.gif?auto=format&dpr=1&w=1000",
+                name: "Galactic Explorer",
+                description: "A mesmerizing journey through the cosmos, captured in stunning animated detail.",
+                price: "3.5 ETH"
+            },
+            {
+                image: "https://i.seadn.io/s/raw/files/965baeead3f80b530a85106c882d009d.png?auto=format&dpr=1&w=1000",
+                name: "Celestial Guardian",
+                description: "An ethereal being protecting the stars, beautifully depicted in vibrant colors.",
+                price: "4.2 ETH"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function updateNFT() {
+            const nft = nfts[currentIndex];
+            document.getElementById('nft-image').src = nft.image;
+            document.getElementById('nft-name').textContent = `NFT Name: ${nft.name}`;
+            document.getElementById('nft-description').textContent = `Description: ${nft.description}`;
+            document.getElementById('nft-price').textContent = `Price: ${nft.price}`;
         }
-    ];
 
-    let currentIndex = 0;
+        function nextNFT() {
+            currentIndex = (currentIndex + 1) % nfts.length;
+            updateNFT();
+        }
 
-    function updateNFT() {
-        const nft = nfts[currentIndex];
-        document.getElementById('nft-image').src = nft.image;
-        document.getElementById('nft-name').textContent = `NFT Name: ${nft.name}`;
-        document.getElementById('nft-description').textContent = `Description: ${nft.description}`;
-        document.getElementById('nft-price').textContent = `Price: ${nft.price}`;
-    }
+        function prevNFT() {
+            currentIndex = (currentIndex - 1 + nfts.length) % nfts.length;
+            updateNFT();
+        }
 
-    function nextNFT() {
-        currentIndex = (currentIndex + 1) % nfts.length;
-        updateNFT();
-    }
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+        }
 
-    function prevNFT() {
-        currentIndex = (currentIndex - 1 + nfts.length) % nfts.length;
-        updateNFT();
-    }
-
-    function showPopup() {
-        document.getElementById('popup').style.display = 'block';
-    }
-
-    function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-    }
-</script>
-
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
