@@ -29,12 +29,11 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6), 0 16px 32px rgba(0, 0, 0, 0.4);
-            
         }
 
         .image-container img {
             width: 100%;
-            height: 100%;
+            height: auto;
             border-radius: 15px;
         }
 
@@ -58,28 +57,32 @@
         .buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
+            margin-bottom: 15px;
         }
 
         .button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            border-radius: 5px;
+            background: linear-gradient(145deg, #ff7e5f, #feb47b);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
             cursor: pointer;
             color: #fff;
-            flex: 1;
+            font-size: 1em;
+            font-weight: bold;
             text-align: center;
-            margin: 0 5px;
+            margin: 0 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .button:hover {
-            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
 
         .buy-button {
-            margin-top: 20px;
             text-align: center;
+            margin-bottom: 15px;
         }
 
         .popup {
@@ -98,20 +101,23 @@
         }
 
         .close-button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 5px 10px;
-            border-radius: 5px;
+            background: linear-gradient(145deg, #ff7e5f, #feb47b);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
             cursor: pointer;
-            margin-top: 20px;
             color: #fff;
+            font-size: 1em;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .close-button:hover {
-            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
-
-      
 
         @media screen and (max-width: 600px) {
             .container {
@@ -121,33 +127,34 @@
             }
 
             .button {
-                padding: 8px 16px;
+                padding: 10px 20px;
+                margin: 5px 2px;
             }
 
-            .buttons .button {
-                margin: 5px 2px;
+            .close-button {
+                padding: 8px 16px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="image-container">
-            <img id="nft-image" src="https://i.seadn.io/s/raw/files/57e85b3109fcd65c76536034d0f1a0f6.gif?auto=format&dpr=1&w=1000" alt="NFT Image">
-        </div>
-        <div class="details">
+    <main class="container">
+        <section class="buttons">
+            <div class="button" onclick="prevNFT()">Previous</div>
+            <div class="button" onclick="nextNFT()">Next</div>
+        </section>
+        <section class="buy-button">
+            <div class="button" onclick="showPopup()">Buy</div>
+        </section>
+        <section class="image-container">
+            <img id="nft-image" src="https://i.seadn.io/s/raw/files/57e85b3109fcd65c76536034d0f1a0f6.gif?auto=format&dpr=1&w=1000" alt="NFT Image: Galactic Explorer">
+        </section>
+        <section class="details">
             <h1 id="nft-name">NFT Name: Galactic Explorer</h1>
             <p id="nft-description">Description: A mesmerizing journey through the cosmos, captured in stunning animated detail.</p>
             <p class="price" id="nft-price">Price: 3.5 ETH</p>
-        </div>
-        <div class="buttons">
-            <div class="button" onclick="prevNFT()">Previous</div>
-            <div class="button" onclick="nextNFT()">Next</div>
-        </div>
-        <div class="buy-button">
-            <div class="button" onclick="showPopup()">Buy</div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <div class="popup" id="popup">
         <p>NFT FANS TO THE MOON</p>
@@ -175,6 +182,7 @@
         function updateNFT() {
             const nft = nfts[currentIndex];
             document.getElementById('nft-image').src = nft.image;
+            document.getElementById('nft-image').alt = `NFT Image: ${nft.name}`;
             document.getElementById('nft-name').textContent = `NFT Name: ${nft.name}`;
             document.getElementById('nft-description').textContent = `Description: ${nft.description}`;
             document.getElementById('nft-price').textContent = `Price: ${nft.price}`;
